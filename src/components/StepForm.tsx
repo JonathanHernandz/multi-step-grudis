@@ -11,7 +11,7 @@ import Success from './Success'
 import { AppContext } from '../Context'
 
 // Step titles
-const labels = ['First Step', 'Second Step', 'Confirmation']
+const labels = ['Paso 1', 'Paso 2', 'Confirmación']
 const handleSteps = (step: number) => {
   switch (step) {
     case 0:
@@ -36,10 +36,10 @@ export default function StepForm() {
         <>
           <Box sx={{ my: 5 }}>
             <Typography variant='h4' align='center'>
-              Multi Step Form
+              PRE-REGISTRO
             </Typography>
             <Typography variant='subtitle2' align='center' sx={{ mt: 2 }}>
-              React Material UI multi step form with basic form validation logic.
+              Formulario prueba de pre-registro - GRUDIS
             </Typography>
           </Box>
           <Stepper activeStep={activeStep} sx={{ py: 3 }} alternativeLabel>

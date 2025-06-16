@@ -1,7 +1,7 @@
 import { ValidationSchema } from './Context'
 
 export const initialValues: ValidationSchema = {
-  firstName: {
+  nombre1: {
     value: '',
     error: '',
     required: true,
@@ -10,7 +10,7 @@ export const initialValues: ValidationSchema = {
     maxLength: 20,
     helperText: 'Custom error message'
   },
-  lastName: {
+  nombre2: {
     value: '',
     error: '',
     required: true,
@@ -18,25 +18,34 @@ export const initialValues: ValidationSchema = {
     minLength: 2,
     maxLength: 20
   },
-  email: {
+  apellidoPaterno: {
     value: '',
     error: '',
-    validate: 'email'
-  },
-  gender: {
-    value: '',
-    error: '',
-    validate: 'select'
-  },
-  date: {
-    value: '',
-    error: ''
-  },
-  city: {
-    value: '',
-    error: '',
+    required: true,
     validate: 'text',
-    minLength: 3,
+    minLength: 2,
+    maxLength: 20
+  },
+  apellidoMaterno: {
+    value: '',
+    error: '',
+    required: true,
+    validate: 'text',
+    minLength: 2,
+    maxLength: 20
+  },
+  curp: {
+    value: '',
+    error: '',
+    required: true,
+    minLength: 2,
+    maxLength: 20
+  },
+  rfc: {
+    value: '',
+    error: '',
+    required: true,
+    minLength: 2,
     maxLength: 20
   },
   agreenemt: {
@@ -45,11 +54,5 @@ export const initialValues: ValidationSchema = {
     required: true,
     validate: 'checkbox',
     helperText: 'Please accept our terms and conditions'
-  },
-  phone: {
-    value: '',
-    error: '',
-    validate: 'phone',
-    maxLength: 15
   }
 }

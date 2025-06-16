@@ -10,65 +10,52 @@ import { AppContext } from '../Context'
 
 export default function SecondStep() {
   const { formValues, handleChange, handleBack, handleNext, variant, margin } = useContext(AppContext)
-  const { city, date, phone, agreenemt } = formValues
+  const { curp, rfc, agreenemt } = formValues
 
   const isError = useCallback(
     () =>
-      Object.keys({ city, date, phone, agreenemt }).some(
+      Object.keys({ curp, rfc, agreenemt }).some(
         (name) => (formValues[name].required && !formValues[name].value) || formValues[name].error
       ),
-    [formValues, city, date, phone, agreenemt]
+    [formValues, curp, rfc, agreenemt]
   )
 
   return (
     <>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={6}>
           <TextField
             variant={variant}
             margin={margin}
             fullWidth
-            label='City'
-            name='city'
-            placeholder='Enter your city'
-            value={city.value}
+            label='CURP'
+            name='curp'
+            placeholder='Ingrese su CURP'
+            type='curp'
+            value={curp.value}
             onChange={handleChange}
-            error={!!city.error}
-            helperText={city.error}
-            required={city.required}
+            error={!!curp.error}
+            helperText={curp.error}
+            required={curp.required}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={6}>
           <TextField
             variant={variant}
             margin={margin}
             fullWidth
-            InputLabelProps={{
-              shrink: true
-            }}
-            label='Date of birth'
-            name='date'
-            type='date'
-            defaultValue={date.value}
+            label='RFC'
+            name='rfc'
+            placeholder='Ingrese su RFC'
+            type='rfc'
+            value={rfc.value}
             onChange={handleChange}
-            required={date.required}
+            error={!!rfc.error}
+            helperText={rfc.error}
+            required={rfc.required}
           />
         </Grid>
-        <Grid item xs={12}>
-          <TextField
-            variant={variant}
-            margin={margin}
-            fullWidth
-            label='Phone number'
-            name='phone'
-            placeholder='i.e: xxx-xxx-xxxx'
-            value={phone.value}
-            onChange={handleChange}
-            error={!!phone.error}
-            helperText={phone.error}
-            required={phone.required}
-          />
-        </Grid>
+        
         <Grid item xs={12}>
           <FormControlLabel
             control={
@@ -80,7 +67,7 @@ export default function SecondStep() {
                 required={agreenemt.required}
               />
             }
-            label='Agree to terms and conditions'
+            label='Acepto los términos y condiciones'
           />
           <FormHelperText error={!!agreenemt.error}>{agreenemt.error}</FormHelperText>
         </Grid>

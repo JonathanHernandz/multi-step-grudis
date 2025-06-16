@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import axios from 'axios'
 import Box from '@mui/material/Box'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
@@ -7,69 +8,81 @@ import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button'
 import { AppContext } from '../Context'
 
+
 export default function Confirm() {
   const { formValues, handleBack, handleNext } = useContext(AppContext)
-  const { firstName, lastName, email, gender, date, city, phone } = formValues
+  const {nombre1, nombre2, apellidoPaterno, apellidoMaterno, rfc, curp } = formValues
 
-  const handleSubmit = () => {
-    // Remove unwanted properties from formValue object
-    let form = {}
+  const handleSubmit = async () => {
+    try {
+      // Crear un objeto limpio solo con los valores
+      const formData = new URLSearchParams()
+      Object.keys(formValues).forEach((key) => {
+        const field = formValues[key]
+        if (field?.value !== undefined) {
+          formData.append(key, field.value)
+        }
+      })
 
-    Object.keys(formValues).map((name) => {
-      form = {
-        ...form,
-        [name]: formValues[name].value
-      }
-      return form
-    })
-    // Do whatever with the values
-    console.log(form)
-    // Show last component or success message
-    handleNext()
+      // Enviar los datos
+      const response = await axios.post(
+        'https://webmicfx.arashi.solutions/FGR/WsAjaxCoClien',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }
+      )
+
+      console.log('Datos enviados:', response.data)
+
+      // Continuar al siguiente paso
+      handleNext()
+    } catch (error) {
+      console.error('Error al enviar los datos:', error)
+    }
   }
 
   return (
     <>
       <List disablePadding>
         <ListItem>
-          <ListItemText primary='First Name' secondary={firstName.value || 'Not Provided'} />
+          <ListItemText primary='Primer Nombre' secondary={nombre1.value || 'Not Provided'} />
         </ListItem>
 
         <Divider />
 
         <ListItem>
-          <ListItemText primary='Last Name' secondary={lastName.value || 'Not Provided'} />
+          <ListItemText primary='Segundo Nombre' secondary={nombre2.value || 'Not Provided'} />
         </ListItem>
 
         <Divider />
 
         <ListItem>
-          <ListItemText primary='Email Address' secondary={email.value || 'Not Provided'} />
+          <ListItemText primary='Apelido Paterno' secondary={apellidoPaterno.value || 'Not Provided'} />
         </ListItem>
 
         <Divider />
 
         <ListItem>
-          <ListItemText primary='Gender' secondary={gender.value || 'Not Provided'} />
+          <ListItemText primary='Apellido Materno' secondary={apellidoMaterno.value || 'Not Provided'} />
         </ListItem>
 
         <Divider />
 
         <ListItem>
-          <ListItemText primary='Date of birth' secondary={date.value || 'Not Provided'} />
+          <ListItemText primary='CURP' secondary={curp.value || 'Not Provided'} />
         </ListItem>
 
         <Divider />
 
         <ListItem>
-          <ListItemText primary='City' secondary={city.value || 'Not Provided'} />
+          <ListItemText primary='RFC' secondary={rfc.value || 'Not Provided'} />
         </ListItem>
 
         <Divider />
 
-        <ListItem>
-          <ListItemText primary='phone' secondary={phone.value || 'Not Provided'} />
-        </ListItem>
       </List>
 
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>

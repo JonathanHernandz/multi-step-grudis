@@ -11,7 +11,7 @@ function Header() {
     <AppBar position='static'>
       <Toolbar>
         <Typography variant='h6' color='inherit' noWrap>
-          Multi Step Form
+          Multi Step Form - GRUDIS
         </Typography>
         <IconButton color='inherit' aria-label='Github' sx={{ ml: 'auto' }} size='large'>
           <Link
@@ -19,7 +19,7 @@ function Header() {
             component='a'
             rel='noopener noreferrer'
             target='_blank'
-            href='http://github.com/awran5/react-material-ui-step-form'
+            href='https://github.com/JonathanHernandz'
             color='inherit'
           >
             <SvgIcon component='svg'>
